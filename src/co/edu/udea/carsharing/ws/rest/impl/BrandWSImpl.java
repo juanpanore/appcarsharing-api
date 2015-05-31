@@ -25,8 +25,8 @@ import co.edu.udea.carsharing.ws.rest.util.WSUtil;
 public class BrandWSImpl implements IBrandWS {
 
 	@POST()
-	@Consumes(value = { MediaType.APPLICATION_JSON })
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response insert(Brand brand) throws CarSharingWSException {
 		if (!WSUtil.validateBrand(brand)) {
@@ -48,7 +48,7 @@ public class BrandWSImpl implements IBrandWS {
 	}
 
 	@GET()
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response findAll() throws CarSharingWSException {
 		List<Brand> brands = new ArrayList<Brand>();

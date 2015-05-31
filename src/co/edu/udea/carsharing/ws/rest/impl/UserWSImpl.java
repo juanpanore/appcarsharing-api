@@ -32,7 +32,7 @@ public class UserWSImpl implements IUserWS {
 			+ RESTFulWebServicesContract.UserWebServicesContract.PASSWORD_PARAM
 			+ "}")
 	@GET()
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response findByEmailAndPassword(
 			@PathParam(value = RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM) String email,
@@ -62,7 +62,7 @@ public class UserWSImpl implements IUserWS {
 			+ RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM
 			+ "}")
 	@GET()
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response findByEmail(
 			@PathParam(value = RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM) String email)
@@ -85,8 +85,8 @@ public class UserWSImpl implements IUserWS {
 	}
 
 	@POST()
-	@Consumes(value = { MediaType.APPLICATION_JSON })
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response insert(User user) throws CarSharingWSException {
 		if (!WSUtil.validateUser(user)) {
@@ -110,8 +110,8 @@ public class UserWSImpl implements IUserWS {
 			+ RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM
 			+ "}")
 	@PUT()
-	@Consumes(value = { MediaType.APPLICATION_JSON })
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response addCar(
 			@PathParam(value = RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM) String email,
@@ -138,7 +138,7 @@ public class UserWSImpl implements IUserWS {
 			+ RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM
 			+ "}")
 	@GET()
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response getCarsByUser(
 			@PathParam(value = RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM) String email)

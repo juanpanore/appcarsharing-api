@@ -31,7 +31,7 @@ public class EventWSImpl implements IEventWS {
 			+ RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM
 			+ "}")
 	@GET()
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response find(
 			@PathParam(value = RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM) String eventId)
@@ -56,7 +56,7 @@ public class EventWSImpl implements IEventWS {
 
 	@GET()
 	@Path(value = RESTFulWebServicesContract.EventWebServicesContract.FIND_ALL_PATH)
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response findAll() throws CarSharingWSException {
 		List<Event> eventList = new ArrayList<Event>();
@@ -78,8 +78,8 @@ public class EventWSImpl implements IEventWS {
 	}
 
 	@POST()
-	@Consumes(value = { MediaType.APPLICATION_JSON })
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response insert(Event event) throws CarSharingWSException {
 		if (event == null || !WSUtil.validateEvent(event)) {
@@ -106,8 +106,8 @@ public class EventWSImpl implements IEventWS {
 			+ RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM
 			+ "}")
 	@PUT()
-	@Consumes(value = { MediaType.APPLICATION_JSON })
-	@Produces(value = { MediaType.APPLICATION_JSON })
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response insertComment(
 			Comment newComment,
@@ -145,8 +145,8 @@ public class EventWSImpl implements IEventWS {
 			+ RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM
 			+ "}")
 	@PUT()
-	@Produces(value = { MediaType.APPLICATION_JSON })
-	@Consumes(value = { MediaType.APPLICATION_JSON })
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Override()
 	public Response join(
 			User newPartner,
