@@ -123,9 +123,10 @@ public class EventBusinessImpl implements IEventBusiness {
 						EventBusinessImpl.class.getSimpleName(),
 						"insertComment()", String.class.getSimpleName()));
 			} else {
-				if (event.getCar().getCapacity() > event.getAmountPeople()) {
-					// TODO Falta verificar que la persona que se vaya a unir no
-					// se haya unido previamente
+				if (event.getCar().getCapacity() > event.getAmountPeople()
+						&& EventDAOImpl.getInstance().findEventByPartner(
+								event.getId().trim(),
+								newPartner.getEmail().trim()) != null) {
 					if (event.getPartners() == null) {
 
 						event.setPartners(new ArrayList<User>());

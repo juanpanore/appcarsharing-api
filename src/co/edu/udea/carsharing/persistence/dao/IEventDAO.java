@@ -19,11 +19,17 @@ public interface IEventDAO {
 			CarSharingPersistenceBusinessException;
 
 	public Event insertComment(Comment newComment, String eventId)
-			throws CarSharingDAOException, CarSharingPersistenceBusinessException;
+			throws CarSharingDAOException,
+			CarSharingPersistenceBusinessException;
 
 	public Event join(User newPartner, String eventId)
-			throws CarSharingDAOException, CarSharingPersistenceBusinessException;
+			throws CarSharingDAOException,
+			CarSharingPersistenceBusinessException;
 
 	public Event update(Event event) throws CarSharingDAOException,
+			CarSharingPersistenceBusinessException;
+
+	public Event findEventByPartner(String eventId, String partnerEmail)
+			throws CarSharingDAOException,
 			CarSharingPersistenceBusinessException;
 }

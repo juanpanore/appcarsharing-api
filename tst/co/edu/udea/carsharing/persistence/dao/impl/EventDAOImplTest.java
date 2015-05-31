@@ -39,7 +39,7 @@ public class EventDAOImplTest {
 		Car car = new Car("Blanco", "hil456", brand, "2014", 4);
 		cars.add(car);
 
-		User author = new User("Migue √Ångel", "Ossa Ruiz",
+		User author = new User("Migue ¡ngel", "Ossa Ruiz",
 				"miguelcold8@gmail.com");
 		Site source = new Site("latitud1", "longitud1", "U de A");
 		Site target = new Site("latitud2", "longitud2", "U de A");
@@ -100,6 +100,19 @@ public class EventDAOImplTest {
 				"newpartner@gmail.com");
 
 		event = EventDAOImpl.getInstance().join(partner, idEventJoin);
+
+		assertTrue(event != null);
+	}
+
+	@Test
+	public void testFindEventByPartner() throws CarSharingDAOException,
+			CarSharingPersistenceBusinessException,
+			CarSharingTechnicalException {
+		String eventIdPartner = "556a363fac0c981f1c9d46bc";
+		String partnerEmail = "partner1@gmail.com";
+
+		Event event = EventDAOImpl.getInstance().findEventByPartner(
+				eventIdPartner, partnerEmail);
 
 		assertTrue(event != null);
 	}

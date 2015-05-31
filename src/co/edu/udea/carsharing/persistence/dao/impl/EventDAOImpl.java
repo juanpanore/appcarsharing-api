@@ -239,4 +239,55 @@ public class EventDAOImpl implements IEventDAO {
 					EventDAOImpl.class.getSimpleName(), "update()", e));
 		}
 	}
+
+	@Override()
+	public Event findEventByPartner(String eventId, String partnerEmail)
+			throws CarSharingDAOException,
+			CarSharingPersistenceBusinessException {
+		try {
+			if (null == eventId || eventId.trim().isEmpty()
+					|| null == partnerEmail || partnerEmail.trim().isEmpty()) {
+				throw new CarSharingDAOException(
+						String.format(
+								"Clase %s: método %s. El parámetro eventId (%s) "
+										+ "no puede ser nulo ni vacío y el parámetro "
+										+ "partnerEmail (%s) no puede ser nulo ni vacío.",
+								EventDAOImpl.class.getSimpleName(),
+								"findEventByPartner()",
+								String.class.getSimpleName(),
+								String.class.getSimpleName()));
+			} else {
+				BasicDBObject basicDBObject = new BasicDBObject();
+				basicDBObject.put(ID, new ObjectId(eventId));
+				DBObject dbObject = this.collection.findOne(basicDBObject);
+				if (dbObject == null) {
+
+					return null;
+				}
+
+				Event ev = Event.entityFromDBObject(dbObject);
+				List<User> partners = ev.getPartners();
+				if (partners == null || partners.isEmpty()) {
+
+					return null;
+				}
+
+				for (User u : partners) {
+					String email = u.getEmail().trim();
+					if (partnerEmail.trim().equals(email)) {
+
+						return ev;
+					}
+				}
+
+				return null;
+			}
+		} catch (Exception e) {
+			throw new CarSharingDAOException(String.format(
+					"Clase %s: método %s. Se ha producido un error inesperado mientras "
+							+ "se trataba de actualizar un evento activo.\n%s",
+					EventDAOImpl.class.getSimpleName(), "findEventByPartner()",
+					e));
+		}
+	}
 }
