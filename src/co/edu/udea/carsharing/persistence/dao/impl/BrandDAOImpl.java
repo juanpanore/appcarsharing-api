@@ -53,7 +53,7 @@ public class BrandDAOImpl implements IBrandDAO {
 		} catch (Exception e) {
 			throw new CarSharingDAOException(
 					String.format(
-							"Clase %s: mï¿½todo: %s. Error mientras se obtenï¿½an todos objetos %s.\n%s",
+							"Clase %s: método: %s. Error mientras se obtenï¿½an todos objetos %s.\n%s",
 							BrandDAOImpl.class.getSimpleName(), "findAll()",
 							Brand.class.getSimpleName(), e));
 		}
@@ -75,14 +75,14 @@ public class BrandDAOImpl implements IBrandDAO {
 			} else {
 				throw new CarSharingPersistenceBusinessException(
 						String.format(
-								"Clase %s: mï¿½todo: %s. El parï¿½metro brand de tipo %s no puede ser nulo.",
+								"Clase %s: método: %s. El parámetro brand de tipo %s no puede ser nulo.",
 								BrandDAOImpl.class.getSimpleName(), "insert()",
 								Brand.class.getSimpleName()));
 			}
 		} catch (Exception e) {
 			throw new CarSharingDAOException(
 					String.format(
-							"Clase %s: Se presentï¿½ un error inesperado mientras se ejecutaba el mï¿½todo %s.\n%s",
+							"Clase %s: Se presentó un error inesperado mientras se ejecutaba el método %s.\n%s",
 							BrandDAOImpl.class.getSimpleName(), "insert()", e));
 		}
 
@@ -94,8 +94,8 @@ public class BrandDAOImpl implements IBrandDAO {
 		try {
 			if (null == brand || brand.trim().isEmpty()) {
 				throw new CarSharingPersistenceBusinessException(String.format(
-						"Clase %s: mÃ©todo %s. El parÃ¡metro brand de "
-								+ "tipo %s no puede ser nulo ni vacÃ­o.",
+						"Clase %s: método %s. El parámetro brand de "
+								+ "tipo %s no puede ser nulo ni vacío.",
 						BrandDAOImpl.class.getSimpleName(), "find()",
 						String.class.getSimpleName()));
 			} else {
@@ -107,7 +107,7 @@ public class BrandDAOImpl implements IBrandDAO {
 		} catch (Exception e) {
 			throw new CarSharingDAOException(
 					String.format(
-							"Clase %s: mÃ©todo %s. Ha ocurrido un error inesperado.\n%s.",
+							"Clase %s: método %s. Ha ocurrido un error inesperado.\n%s.",
 							BrandDAOImpl.class.getSimpleName(), "find()", e));
 		}
 	}

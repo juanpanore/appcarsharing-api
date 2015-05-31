@@ -8,6 +8,9 @@ import co.edu.udea.carsharing.technical.exception.CarSharingTechnicalException;
 
 public interface IBrandBusiness {
 
+	public Brand find(String brand) throws CarSharingBusinessException,
+			CarSharingTechnicalException;
+
 	public List<Brand> findAll() throws CarSharingBusinessException,
 			CarSharingTechnicalException;
 

@@ -6,6 +6,7 @@ import co.edu.udea.carsharing.business.IBrandBusiness;
 import co.edu.udea.carsharing.business.exception.CarSharingBusinessException;
 import co.edu.udea.carsharing.model.entities.Brand;
 import co.edu.udea.carsharing.persistence.dao.impl.BrandDAOImpl;
+import co.edu.udea.carsharing.technical.exception.CarSharingTechnicalException;
 
 public class BrandBusinessImpl implements IBrandBusiness {
 
@@ -50,8 +51,7 @@ public class BrandBusinessImpl implements IBrandBusiness {
 								BrandBusinessImpl.class.getSimpleName(),
 								"insert()", Brand.class.getSimpleName(),
 								String.class.getSimpleName(), brand.toString()));
-			} else if (null != BrandDAOImpl.getInstance()
-					.find(brand.getBrand().toUpperCase())) {
+			} else if (null != this.find(brand.getBrand().toUpperCase())) {
 				throw new CarSharingBusinessException(
 						String.format(
 								"Clase: %s, método %s. La marca con nombre %s ya existe.",
@@ -67,5 +67,29 @@ public class BrandBusinessImpl implements IBrandBusiness {
 							+ "al tratar de insertar una marca.\n%s",
 					BrandBusinessImpl.class.getSimpleName(), "insert()", e));
 		}
+	}
+
+	@Override()
+	public Brand find(String brand) throws CarSharingBusinessException,
+			CarSharingTechnicalException {
+		Brand b = null;
+		try {
+			if (null == brand || brand.trim().isEmpty()) {
+				throw new CarSharingBusinessException(String.format(
+						"Clase: %s, método %s. El parámetro brand (%s) no "
+								+ "puede ser nulo ni vacío.",
+						BrandBusinessImpl.class.getSimpleName(), "find()",
+						String.class.getSimpleName()));
+			} else {
+				b = BrandDAOImpl.getInstance().find(brand);
+			}
+		} catch (Exception e) {
+			throw new CarSharingBusinessException(String.format(
+					"Clase: %s, método %s. Se ha producido un error inesperado "
+							+ "al tratar de buscar una marca.\n%s",
+					BrandBusinessImpl.class.getSimpleName(), "find()", e));
+		}
+
+		return b;
 	}
 }
