@@ -32,6 +32,15 @@ public class EventDAOImpl implements IEventDAO {
 	private static final String EVENTS_COLLECTION_NAME = "Events";
 	private static final String ID = "_id";
 	private static final String STATE = "state";
+	private static String CREATEDATE = "createDate";
+	private static String EVENTDATE = "eventDate";
+	private static String AUTHOR = "author";
+	private static String CAR = "car";
+	private static String COMMENTS = "comments";
+	private static String SOURCE = "source";
+	private static String TARGET = "target";
+	private static String VALUE = "value";
+	private static String AMOUNTPEOPLE = "amountPeople";
 	public static final Map<String, String> INEQUALITIES = new HashMap<String, String>();
 
 	static {
@@ -257,9 +266,21 @@ public class EventDAOImpl implements IEventDAO {
 								String.class.getSimpleName(),
 								String.class.getSimpleName()));
 			} else {
-				BasicDBObject basicDBObject = new BasicDBObject();
-				basicDBObject.put(ID, new ObjectId(eventId));
-				DBObject dbObject = this.collection.findOne(basicDBObject);
+				BasicDBObject query = new BasicDBObject();
+				query.put(ID, new ObjectId(eventId));
+				
+				BasicDBObject projection = new BasicDBObject();
+				projection.put(EVENTDATE, 0);
+				projection.put(AMOUNTPEOPLE, 0);
+				projection.put(AUTHOR, 0);
+				projection.put(CAR, 0);
+				projection.put(COMMENTS, 0);
+				projection.put(SOURCE, 0);
+				projection.put(TARGET, 0);
+				projection.put(VALUE, 0);
+				projection.put(CREATEDATE, 0);
+				
+				DBObject dbObject = this.collection.findOne(query, projection);
 				if (dbObject == null) {
 
 					return null;
