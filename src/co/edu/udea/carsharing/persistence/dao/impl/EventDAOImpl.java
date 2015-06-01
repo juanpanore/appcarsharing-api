@@ -268,7 +268,7 @@ public class EventDAOImpl implements IEventDAO {
 			} else {
 				BasicDBObject query = new BasicDBObject();
 				query.put(ID, new ObjectId(eventId));
-				
+
 				BasicDBObject projection = new BasicDBObject();
 				projection.put(EVENTDATE, 0);
 				projection.put(AMOUNTPEOPLE, 0);
@@ -279,7 +279,8 @@ public class EventDAOImpl implements IEventDAO {
 				projection.put(TARGET, 0);
 				projection.put(VALUE, 0);
 				projection.put(CREATEDATE, 0);
-				
+				projection.put(STATE, 0);
+
 				DBObject dbObject = this.collection.findOne(query, projection);
 				if (dbObject == null) {
 
