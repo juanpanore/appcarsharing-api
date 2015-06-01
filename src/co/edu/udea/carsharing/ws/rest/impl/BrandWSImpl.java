@@ -44,7 +44,7 @@ public class BrandWSImpl implements IBrandWS {
 		}
 
 		return (b != null) ? Response.ok(b).build() : Response.status(
-				Response.Status.NO_CONTENT).build();
+				Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
 
 	@GET()

@@ -22,10 +22,13 @@ import co.edu.udea.carsharing.model.entities.User;
 import co.edu.udea.carsharing.ws.IEventWS;
 import co.edu.udea.carsharing.ws.exception.CarSharingWSException;
 import co.edu.udea.carsharing.ws.rest.contract.RESTFulWebServicesContract;
+import co.edu.udea.carsharing.ws.rest.util.ResponseMessage;
 import co.edu.udea.carsharing.ws.rest.util.WSUtil;
 
 @Path(value = RESTFulWebServicesContract.EventWebServicesContract.ROOT_PATH)
 public class EventWSImpl implements IEventWS {
+
+	private static final String FULL = "El cupo máximo ya se encuentra ocupado.";
 
 	@Path(value = "/{"
 			+ RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM
@@ -97,7 +100,8 @@ public class EventWSImpl implements IEventWS {
 			}
 
 			return (returnedEvent != null) ? Response.ok(returnedEvent).build()
-					: Response.status(Response.Status.NO_CONTENT).build();
+					: Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.build();
 		}
 	}
 
@@ -136,7 +140,8 @@ public class EventWSImpl implements IEventWS {
 			}
 
 			return (returnedEvent != null) ? Response.ok(returnedEvent).build()
-					: Response.status(Response.Status.NO_CONTENT).build();
+					: Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.build();
 		}
 	}
 
@@ -164,8 +169,9 @@ public class EventWSImpl implements IEventWS {
 					returnedEvent = EventBusinessImpl.getInstance().join(
 							newPartner, returnedEvent);
 				} else {
+					ResponseMessage responseMessage = new ResponseMessage(FULL);
 
-					return Response.status(Response.Status.BAD_REQUEST).build();
+					return Response.ok(responseMessage).build();
 				}
 
 			} catch (CarSharingBusinessException e) {

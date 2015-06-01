@@ -21,10 +21,14 @@ import co.edu.udea.carsharing.model.entities.User;
 import co.edu.udea.carsharing.ws.IUserWS;
 import co.edu.udea.carsharing.ws.exception.CarSharingWSException;
 import co.edu.udea.carsharing.ws.rest.contract.RESTFulWebServicesContract;
+import co.edu.udea.carsharing.ws.rest.util.ResponseMessage;
 import co.edu.udea.carsharing.ws.rest.util.WSUtil;
 
 @Path(value = RESTFulWebServicesContract.UserWebServicesContract.ROOT_PATH)
 public class UserWSImpl implements IUserWS {
+
+	private static final String NO_USER = "No se encontró el usuario con "
+			+ "los datos especificados";
 
 	@Path(value = "/{"
 			+ RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM
@@ -53,7 +57,7 @@ public class UserWSImpl implements IUserWS {
 					.build();
 		}
 
-		return (user == null) ? Response.status(Response.Status.NO_CONTENT)
+		return (user == null) ? Response.ok(new ResponseMessage(NO_USER))
 				.build() : Response.ok(user).build();
 	}
 
@@ -80,7 +84,7 @@ public class UserWSImpl implements IUserWS {
 					.build();
 		}
 
-		return (user == null) ? Response.status(Response.Status.NO_CONTENT)
+		return (user == null) ? Response.ok(new ResponseMessage(NO_USER))
 				.build() : Response.ok(user).build();
 	}
 
@@ -102,8 +106,9 @@ public class UserWSImpl implements IUserWS {
 					.build();
 		}
 
-		return (u == null) ? Response.status(Response.Status.NO_CONTENT)
-				.build() : Response.ok(u).build();
+		return (u == null) ? Response.status(
+				Response.Status.INTERNAL_SERVER_ERROR).build() : Response.ok(u)
+				.build();
 	}
 
 	@Path(value = "/{"
@@ -129,8 +134,9 @@ public class UserWSImpl implements IUserWS {
 					.build();
 		}
 
-		return (user == null) ? Response.status(Response.Status.NO_CONTENT)
-				.build() : Response.ok(user).build();
+		return (user == null) ? Response.status(
+				Response.Status.INTERNAL_SERVER_ERROR).build() : Response.ok(
+				user).build();
 	}
 
 	@Path(value = RESTFulWebServicesContract.UserWebServicesContract.FIND_CARS_BY_USER_PATH

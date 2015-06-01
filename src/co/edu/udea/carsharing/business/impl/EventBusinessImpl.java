@@ -126,7 +126,7 @@ public class EventBusinessImpl implements IEventBusiness {
 				if (event.getCar().getCapacity() > event.getAmountPeople()
 						&& EventDAOImpl.getInstance().findEventByPartner(
 								event.getId().trim(),
-								newPartner.getEmail().trim()) != null) {
+								newPartner.getEmail().trim()) == null) {
 					if (event.getPartners() == null) {
 
 						event.setPartners(new ArrayList<User>());
