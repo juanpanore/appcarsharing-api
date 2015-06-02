@@ -29,6 +29,8 @@ public class UserWSImpl implements IUserWS {
 
 	private static final String NO_USER = "No se encontró el usuario con "
 			+ "los datos especificados";
+	private static final String REPEATED_CAR = "Se encontró un carro con "
+			+ "la misma placa que el que se desea insertar";
 
 	@Path(value = "/{"
 			+ RESTFulWebServicesContract.UserWebServicesContract.EMAIL_PARAM
@@ -136,8 +138,9 @@ public class UserWSImpl implements IUserWS {
 					.build();
 		}
 
-		return (user == null) ? Response.ok(new ResponseMessage(NO_USER))
-				.build() : Response.ok(user).build();
+		return (user == null) ? Response.ok(
+				new ResponseMessage(NO_USER + " o " + REPEATED_CAR)).build()
+				: Response.ok(user).build();
 	}
 
 	@Path(value = RESTFulWebServicesContract.UserWebServicesContract.FIND_CARS_BY_USER_PATH

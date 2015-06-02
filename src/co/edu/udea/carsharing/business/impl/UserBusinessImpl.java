@@ -119,6 +119,20 @@ public class UserBusinessImpl implements IUserBusiness {
 				if (user != null) {
 					if (user.getCars() == null) {
 						user.setCars(new ArrayList<Car>());
+					} else {
+						List<Car> cars = user.getCars();
+						for (Car c : cars) {
+							if (c.getCarriagePlate() != null
+									&& car.getCarriagePlate() != null
+									&& c.getCarriagePlate()
+											.trim()
+											.toUpperCase()
+											.equals(car.getCarriagePlate()
+													.trim().toUpperCase())) {
+
+								return null;
+							}
+						}
 					}
 
 					car.setCarriagePlate(car.getCarriagePlate().toUpperCase());
