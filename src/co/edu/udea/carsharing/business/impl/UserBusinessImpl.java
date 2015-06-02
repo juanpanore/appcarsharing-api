@@ -123,6 +123,7 @@ public class UserBusinessImpl implements IUserBusiness {
 
 					car.setCarriagePlate(car.getCarriagePlate().toUpperCase());
 					user.getCars().add(car);
+
 					return UserDAOImpl.getInstance().update(user);
 				}
 

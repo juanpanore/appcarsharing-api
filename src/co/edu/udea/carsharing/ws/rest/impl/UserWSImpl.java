@@ -80,6 +80,7 @@ public class UserWSImpl implements IUserWS {
 		try {
 			user = UserBusinessImpl.getInstance().findByEmail(email);
 		} catch (CarSharingBusinessException e) {
+
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.build();
 		}
@@ -130,13 +131,13 @@ public class UserWSImpl implements IUserWS {
 		try {
 			user = UserBusinessImpl.getInstance().addCar(email, car);
 		} catch (CarSharingBusinessException e) {
+
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.build();
 		}
 
-		return (user == null) ? Response.status(
-				Response.Status.INTERNAL_SERVER_ERROR).build() : Response.ok(
-				user).build();
+		return (user == null) ? Response.ok(new ResponseMessage(NO_USER))
+				.build() : Response.ok(user).build();
 	}
 
 	@Path(value = RESTFulWebServicesContract.UserWebServicesContract.FIND_CARS_BY_USER_PATH
