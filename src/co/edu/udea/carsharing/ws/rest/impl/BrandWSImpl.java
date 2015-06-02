@@ -19,10 +19,13 @@ import co.edu.udea.carsharing.technical.exception.CarSharingTechnicalException;
 import co.edu.udea.carsharing.ws.IBrandWS;
 import co.edu.udea.carsharing.ws.exception.CarSharingWSException;
 import co.edu.udea.carsharing.ws.rest.contract.RESTFulWebServicesContract;
+import co.edu.udea.carsharing.ws.rest.util.ResponseMessage;
 import co.edu.udea.carsharing.ws.rest.util.WSUtil;
 
 @Path(value = RESTFulWebServicesContract.BrandtWebServicesContract.ROOT_PATH)
 public class BrandWSImpl implements IBrandWS {
+
+	private static final String REPEATED = "La marca ha insertar se encuentra repetida.";
 
 	@POST()
 	@Consumes(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -34,7 +37,7 @@ public class BrandWSImpl implements IBrandWS {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 
-		Brand b;
+		Brand b = null;
 		try {
 
 			b = BrandBusinessImpl.getInstance().insert(brand);
@@ -43,8 +46,8 @@ public class BrandWSImpl implements IBrandWS {
 					.build();
 		}
 
-		return (b != null) ? Response.ok(b).build() : Response.status(
-				Response.Status.INTERNAL_SERVER_ERROR).build();
+		return (b != null) ? Response.ok(b).build() : Response.ok(
+				new ResponseMessage(REPEATED)).build();
 	}
 
 	@GET()

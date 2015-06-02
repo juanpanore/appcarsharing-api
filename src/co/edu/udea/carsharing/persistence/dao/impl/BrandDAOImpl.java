@@ -53,7 +53,7 @@ public class BrandDAOImpl implements IBrandDAO {
 		} catch (Exception e) {
 			throw new CarSharingDAOException(
 					String.format(
-							"Clase %s: método: %s. Error mientras se obtenï¿½an todos objetos %s.\n%s",
+							"Clase %s: método: %s. Error mientras se obtenían todos objetos %s.\n%s",
 							BrandDAOImpl.class.getSimpleName(), "findAll()",
 							Brand.class.getSimpleName(), e));
 		}

@@ -52,13 +52,10 @@ public class BrandBusinessImpl implements IBrandBusiness {
 								"insert()", Brand.class.getSimpleName(),
 								String.class.getSimpleName(), brand.toString()));
 			} else if (null != this.find(brand.getBrand().toUpperCase())) {
-				throw new CarSharingBusinessException(
-						String.format(
-								"Clase: %s, método %s. La marca con nombre %s ya existe.",
-								BrandBusinessImpl.class.getSimpleName(),
-								"insert()", Brand.class.getSimpleName(),
-								brand.getBrand()));
+
+				return null;
 			} else {
+
 				return BrandDAOImpl.getInstance().insert(brand);
 			}
 		} catch (Exception e) {
