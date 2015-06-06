@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
+@XmlAccessorType(value = XmlAccessType.PROPERTY)
+@XmlRootElement()
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 8155172105840619244L;

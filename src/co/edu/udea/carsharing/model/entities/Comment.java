@@ -3,9 +3,15 @@ package co.edu.udea.carsharing.model.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
+@XmlAccessorType(value = XmlAccessType.PROPERTY)
+@XmlRootElement()
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 3823050722730537024L;
