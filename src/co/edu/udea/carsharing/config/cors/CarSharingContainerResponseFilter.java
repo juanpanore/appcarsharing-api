@@ -14,12 +14,18 @@ public class CarSharingContainerResponseFilter implements
 		super();
 	}
 
+	@Override()
 	public ContainerResponse filter(ContainerRequest requestContext,
 			ContainerResponse responseContext) {
 		ResponseBuilder responseBuilder = Response.fromResponse(responseContext
 				.getResponse());
-		responseBuilder.header("Access-Control-Allow-Origin", "*").header(
-				"Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT");
+
+		// responseBuilder.header("Access-Control-Allow-Credentials", "false");
+		responseBuilder.header("Access-Control-Allow-Origin", "*");
+		responseBuilder.header("Access-Control-Allow-Methods",
+				"GET, POST, OPTIONS, PUT");
+		responseBuilder.header("Access-Control-Allow-Headers",
+				"origin, content-type, accept, authorization");
 
 		String requestHeader = requestContext
 				.getHeaderValue("Access-Control-Request-Headers");
