@@ -17,8 +17,8 @@ public class CarSharingContainerResponseFilter implements
 	@Override()
 	public ContainerResponse filter(ContainerRequest requestContext,
 			ContainerResponse responseContext) {
-	//	String ambiente= "http://localhost:9000";
-		String ambiente= "https://appcarsharing-api.herokuapp.com";
+		// String ambiente= "http://localhost:9000";
+		String ambiente= "https://appcarsharing-web.herokuapp.com";
 		ResponseBuilder responseBuilder = Response.fromResponse(responseContext
 				.getResponse());
 
