@@ -17,15 +17,18 @@ public class CarSharingContainerResponseFilter implements
 	@Override()
 	public ContainerResponse filter(ContainerRequest requestContext,
 			ContainerResponse responseContext) {
+	//	String ambiente= "http://localhost:9000";
+		String ambiente= "https://appcarsharing-api.herokuapp.com";
 		ResponseBuilder responseBuilder = Response.fromResponse(responseContext
 				.getResponse());
 
-		// responseBuilder.header("Access-Control-Allow-Credentials", "false");
-		responseBuilder.header("Access-Control-Allow-Origin", "*");
+		responseBuilder.header("Access-Control-Allow-Origin", ambiente);
 		responseBuilder.header("Access-Control-Allow-Methods",
 				"GET, POST, OPTIONS, PUT");
 		responseBuilder.header("Access-Control-Allow-Headers",
 				"origin, content-type, accept, authorization");
+		responseBuilder.header("Access-Control-Allow-Credentials",
+				"true");
 
 		String requestHeader = requestContext
 				.getHeaderValue("Access-Control-Request-Headers");
