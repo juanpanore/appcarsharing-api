@@ -196,4 +196,18 @@ public class UserDAOImpl implements IUserDAO {
 					UserDAOImpl.class.getSimpleName(), "getCarsByUser", e));
 		}
 	}
+
+	@Override()
+	public List<User> getAll() throws CarSharingDAOException {
+		BasicDBObject basicDBObject = new BasicDBObject(PASSWORD, 0);
+		DBCursor dbCursor = this.collection.find(basicDBObject);
+
+		List<DBObject> usersDB = dbCursor.toArray();
+		List<User> users = new ArrayList<User>();
+		for (DBObject dbo : usersDB) {
+			users.add(User.entityFromDBObject(dbo));
+		}
+
+		return users;
+	}
 }

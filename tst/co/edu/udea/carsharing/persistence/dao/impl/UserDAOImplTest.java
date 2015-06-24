@@ -108,4 +108,12 @@ public class UserDAOImplTest {
 
 		assertTrue(user != null && !("").equals(user.getId()));
 	}
+
+	@Test
+	public void testGetAll() throws CarSharingDAOException,
+			CarSharingTechnicalException {
+		List<User> users = UserDAOImpl.getInstance().getAll();
+
+		assertTrue(users.size() >= 0);
+	}
 }

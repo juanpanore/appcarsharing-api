@@ -23,4 +23,6 @@ public interface IUserDAO {
 			CarSharingPersistenceBusinessException;
 
 	public List<Car> getCarsByUser(String email) throws CarSharingDAOException;
+
+	public List<User> getAll() throws CarSharingDAOException;
 }
