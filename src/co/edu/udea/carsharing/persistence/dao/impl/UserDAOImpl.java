@@ -200,7 +200,9 @@ public class UserDAOImpl implements IUserDAO {
 	@Override()
 	public List<User> getAll() throws CarSharingDAOException {
 		BasicDBObject basicDBObject = new BasicDBObject(PASSWORD, 0);
-		DBCursor dbCursor = this.collection.find(basicDBObject);
+		basicDBObject.put(CARS, 0);
+		DBCursor dbCursor = this.collection.find(new BasicDBObject(),
+				basicDBObject);
 
 		List<DBObject> usersDB = dbCursor.toArray();
 		List<User> users = new ArrayList<User>();

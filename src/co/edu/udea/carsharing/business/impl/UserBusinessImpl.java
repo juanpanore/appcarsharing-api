@@ -138,7 +138,10 @@ public class UserBusinessImpl implements IUserBusiness {
 					car.setCarriagePlate(car.getCarriagePlate().toUpperCase());
 					user.getCars().add(car);
 
-					return UserDAOImpl.getInstance().update(user);
+					if (UserDAOImpl.getInstance().update(user) != null) {
+
+						return this.findByEmail(user.getEmail());
+					}
 				}
 
 				return null;
@@ -176,6 +179,21 @@ public class UserBusinessImpl implements IUserBusiness {
 									+ "al tratar de obtener el listado de carros de un usuario.\n%s",
 							UserBusinessImpl.class.getSimpleName(),
 							"getCarsByUser()", e));
+		}
+	}
+
+	@Override()
+	public List<User> getAll() throws CarSharingBusinessException {
+		try {
+
+			return UserDAOImpl.getInstance().getAll();
+		} catch (Exception e) {
+			throw new CarSharingBusinessException(
+					String.format(
+							"Clase %s: método %s. Se ha producido un error inesperado "
+									+ "al tratar de obtener el listado de todos los usuarios.\n%s",
+							UserBusinessImpl.class.getSimpleName(), "getAll()",
+							e));
 		}
 	}
 

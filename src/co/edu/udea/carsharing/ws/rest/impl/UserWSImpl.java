@@ -172,4 +172,25 @@ public class UserWSImpl implements IUserWS {
 		return (cars.isEmpty()) ? Response.status(Response.Status.NO_CONTENT)
 				.build() : Response.ok(entity).build();
 	}
+
+	@GET()
+	@Produces(value = MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Override()
+	public Response getAll() throws CarSharingWSException {
+		List<User> users = new ArrayList<User>();
+
+		try {
+
+			users = UserBusinessImpl.getInstance().getAll();
+		} catch (CarSharingBusinessException e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.build();
+		}
+
+		GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users) {
+		};
+
+		return (users.isEmpty()) ? Response.status(Response.Status.NO_CONTENT)
+				.build() : Response.ok(entity).build();
+	}
 }

@@ -18,4 +18,6 @@ public interface IUserWS {
 	public Response addCar(String email, Car car) throws CarSharingWSException;
 
 	public Response getCarsByUser(String email) throws CarSharingWSException;
+
+	public Response getAll() throws CarSharingWSException;
 }

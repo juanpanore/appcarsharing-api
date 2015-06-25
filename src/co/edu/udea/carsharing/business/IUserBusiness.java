@@ -19,4 +19,6 @@ public interface IUserBusiness {
 
 	public List<Car> getCarsByUser(String email)
 			throws CarSharingBusinessException;
+
+	public List<User> getAll() throws CarSharingBusinessException;
 }
