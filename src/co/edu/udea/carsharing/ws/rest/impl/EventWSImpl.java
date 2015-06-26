@@ -186,18 +186,18 @@ public class EventWSImpl implements IEventWS {
 
 	private boolean validateJoin(Event event) {
 		if (event != null) {
+			int amount = event.getPartners().size();
 			int amountPeople = event.getAmountPeople();
-			int capacity = event.getCar().getCapacity();
-			if (capacity <= amountPeople) {
 
-				return false;
-			} else {
+			if (amount == amountPeople) {
+				int capacity = event.getCar().getCapacity();
+				if (capacity > amountPeople) {
 
-				return true;
+					return true;
+				}
 			}
-		} else {
-
-			return false;
 		}
+
+		return false;
 	}
 }

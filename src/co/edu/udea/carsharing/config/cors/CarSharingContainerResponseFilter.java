@@ -27,8 +27,7 @@ public class CarSharingContainerResponseFilter implements
 				"GET, POST, OPTIONS, PUT");
 		responseBuilder.header("Access-Control-Allow-Headers",
 				"origin, content-type, accept, authorization");
-		responseBuilder.header("Access-Control-Allow-Credentials",
-				"true");
+		responseBuilder.header("Access-Control-Allow-Credentials", "true");
 
 		String requestHeader = requestContext
 				.getHeaderValue("Access-Control-Request-Headers");

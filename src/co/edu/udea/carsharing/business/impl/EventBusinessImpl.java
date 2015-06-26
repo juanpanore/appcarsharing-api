@@ -124,9 +124,7 @@ public class EventBusinessImpl implements IEventBusiness {
 						"insertComment()", String.class.getSimpleName()));
 			} else {
 				if (event.getCar().getCapacity() > event.getAmountPeople()
-						&& EventDAOImpl.getInstance().findEventByPartner(
-								event.getId().trim(),
-								newPartner.getEmail().trim()) == null) {
+						&& isJoint(newPartner.getEmail(), event.getPartners())) {
 					if (event.getPartners() == null) {
 
 						event.setPartners(new ArrayList<User>());
@@ -170,4 +168,21 @@ public class EventBusinessImpl implements IEventBusiness {
 		}
 	}
 
+	private boolean isJoint(String partnerEmail, List<User> partnerList) {
+		if (partnerEmail == null || partnerEmail.trim().isEmpty()
+				|| partnerList == null) {
+
+			return false;
+		}
+
+		for (User u : partnerList) {
+			String temp = u.getEmail();
+			if (partnerEmail.trim().equals(temp.trim())) {
+
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
