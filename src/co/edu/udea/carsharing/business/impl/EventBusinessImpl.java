@@ -169,17 +169,18 @@ public class EventBusinessImpl implements IEventBusiness {
 	}
 
 	private boolean isJoint(String partnerEmail, List<User> partnerList) {
-		if (partnerEmail == null || partnerEmail.trim().isEmpty()
-				|| partnerList == null) {
+		if (partnerEmail == null) {
 
 			return false;
 		}
 
-		for (User u : partnerList) {
-			String temp = u.getEmail();
-			if (partnerEmail.trim().equals(temp.trim())) {
+		if (partnerList != null && !partnerList.isEmpty()) {
+			for (User u : partnerList) {
+				String temp = u.getEmail();
+				if (partnerEmail.trim().equals(temp.trim())) {
 
-				return false;
+					return false;
+				}
 			}
 		}
 

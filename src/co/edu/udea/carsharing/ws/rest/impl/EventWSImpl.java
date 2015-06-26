@@ -29,6 +29,7 @@ import co.edu.udea.carsharing.ws.rest.util.WSUtil;
 public class EventWSImpl implements IEventWS {
 
 	private static final String FULL = "El cupo máximo ya se encuentra ocupado.";
+	private static final String JOINT = "El usuario que se intenta unir al viaje es el creador del mismo.";
 
 	@Path(value = "/{"
 			+ RESTFulWebServicesContract.EventWebServicesContract.EVENT_ID_PARAM
@@ -166,17 +167,37 @@ public class EventWSImpl implements IEventWS {
 				returnedEvent = EventBusinessImpl.getInstance().find(eventId);
 				if (returnedEvent != null && validateJoin(returnedEvent)) {
 
-					returnedEvent = EventBusinessImpl.getInstance().join(
-							newPartner, returnedEvent);
-				} else {
-					ResponseMessage responseMessage = new ResponseMessage(FULL);
+					if (returnedEvent.getAuthor().getEmail() != null
+							&& !returnedEvent.getAuthor().getEmail()
+									.equals(newPartner.getEmail())) {
 
-					return Response.ok(responseMessage).build();
+						returnedEvent = EventBusinessImpl.getInstance().join(
+								newPartner, returnedEvent);
+					} else {
+
+						ResponseMessage responseMessage = new ResponseMessage(
+								JOINT);
+
+						return Response.ok(responseMessage).build();
+					}
+				} else {
+					if (returnedEvent.getPartners() != null
+							&& returnedEvent.getPartners().size() == returnedEvent
+									.getAmountPeople()
+							&& returnedEvent.getCar().getCapacity() == returnedEvent
+									.getAmountPeople()) {
+						ResponseMessage responseMessage = new ResponseMessage(
+								FULL);
+
+						return Response.ok(responseMessage).build();
+					}
+
+					return Response.status(
+							Response.Status.INTERNAL_SERVER_ERROR).build();
 				}
 
 			} catch (CarSharingBusinessException e) {
-				return (Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-						.build());
+				return (Response.status(Response.Status.CONFLICT).build());
 			}
 
 			return (returnedEvent != null) ? Response.ok(returnedEvent).build()
@@ -186,7 +207,12 @@ public class EventWSImpl implements IEventWS {
 
 	private boolean validateJoin(Event event) {
 		if (event != null) {
-			int amount = event.getPartners().size();
+			int amount = 0;
+			if (event.getPartners() != null) {
+
+				amount = event.getPartners().size();
+			}
+
 			int amountPeople = event.getAmountPeople();
 
 			if (amount == amountPeople) {
