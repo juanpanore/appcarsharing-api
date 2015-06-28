@@ -1,6 +1,7 @@
 package co.edu.udea.carsharing.persistence.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +97,8 @@ public class EventDAOImpl implements IEventDAO {
 
 			BasicDBObject query = new BasicDBObject(STATE,
 					StateEnum.ACTIVE.getDescription());
+			query.put(EVENTDATE, new BasicDBObject(INEQUALITIES.get(">"),
+					new Date()));
 			DBCursor dbCursor = this.collection
 					.find(query, new BasicDBObject());
 
